@@ -37,6 +37,17 @@ You need to clone this project as well as the [PN352](https://github.com/dotnet/
 
 ![directories](./Docs/directories.png)
 
+Make sure to create the folder PN352 (in uppercase) and put in this folder the following folder:
+* https://github.com/dotnet/iot/tree/master/src/devices/Pn532
+* https://github.com/dotnet/iot/tree/master/src/devices/Common
+* https://github.com/dotnet/iot/tree/master/src/devices/Card
+
+You will also need to to add *System.Device.Gpio*. Navigate to the folder PN352/Pn352 and run the following command
+
+```sh
+> dotnet add package System.Device.Gpio --source https://dotnetfeed.blob.core.windows.net/dotnet-iot/index.json --version 1.0.0-prerelease.19413.1
+```
+
 The main BanikioskIoT project reference the 2 other projects.
 
 **Notes: **

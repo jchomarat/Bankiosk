@@ -96,3 +96,38 @@ What is important above is the Privileged and the port (by default it is 3000, b
 
 
 * Module twin's desired properties: leave at it is
+
+# Booting the Raspberry Pi in kiosk mode
+
+To have a maximezed experience, the RPI should boot in "kiosk" mode. The kiosk mode allows, once the RPI is loaded, to launch Chromium (the default browser) in full screen on the page you select. It creates an immersive experience.
+
+To do so, follow the steps below (got from [here](http://blog.philippegarry.com/2018/08/19/faire-de-son-pi-une-borne-raspberry-pi-kiosk-mode-stretch-version/) in french)
+
+Create the folder ~/.config/autostart if it does not exist (under your default account used at startup, by default *pi*)
+
+```sh
+> mkdir ~/.config/autostart
+```
+
+Create a file called *autoChromium.desktop* under this folder
+
+```sh
+> nano ~/.config/autostart/autoChromium.desktop
+```
+
+Paste the following content
+
+```sh
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/chromium-browser --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --kiosk $bankioskUI_URL
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=AutoChromium
+Name=AutoChromium
+Comment=Start bankiosk in kiosk mode
+```
+
+Make sure to replace *$bankioskUI_URL* by the actual URL (by default, a React app URL is http://localhost:3000)
+
+Reboot your RPI - and Bankiosk should be opened right away. Please note that it may takes some time to start the different containers, you may then receive an error message. Do no worry, it will refresh once ready!
