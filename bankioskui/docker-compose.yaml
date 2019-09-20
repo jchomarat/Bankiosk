@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+
+  bankiosk-iot:
+    image: bankioskcontainersregistry.azurecr.io/bankiosk/iot:94
+    privileged: true
+    ports:
+      - '8181:1234'
+    environment:
+      - NFC_MODE_CONFIG=/dev/ttyS0
+      - NFC_MODE=HSU
+      - ASPNETCORE_URLS=http://+:1234
+      - NONFC=true
+
+  bankiosk-ui:
+    image: bankioskcontainersregistry.azurecr.io/bankiosk/ui:latest
+    ports:
+      - '8080:3000'
+    environment:
+      - REACT_APP_BASE_CORE_URL=http://localhost:8181
+

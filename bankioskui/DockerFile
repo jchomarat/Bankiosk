@@ -1,0 +1,5 @@
+FROM arm32v7/node:8-slim as bankiosk-ui
+WORKDIR /app
+COPY . ./
+RUN npm install --silent
+CMD npm start

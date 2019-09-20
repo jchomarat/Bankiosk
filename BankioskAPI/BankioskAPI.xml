@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BankioskAPI</name>
+    </assembly>
+    <members>
+        <member name="M:BankioskAPI.Controllers.ActionsController.GetActionsAsync">
+            <summary>
+            Get a list of actions that can be performed in the branch
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.AdvisorsController.Get(System.String)">
+            <summary>
+            Gets details for the specified Advisor ID
+            </summary>
+            <param name="AdvisorID">The RowKey of the advisor</param>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.AppointmentsController.Get(System.String)">
+            <summary>
+            Get list of appointments for that customer
+            </summary>
+            <param name="CustomerID">The customer's RowKey</param>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.CustomersController.#ctor(Microsoft.Extensions.Options.IOptions{BankioskAPI.Models.AppSettings})">
+            <summary>
+            initializer
+            </summary>
+            <param name="appSettings"></param>
+        </member>
+        <member name="M:BankioskAPI.Controllers.CustomersController.Get">
+            <summary>
+            Get all customers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.CustomersController.Get(System.String)">
+            <summary>
+            Retrieve a specific customer
+            </summary>
+            <param name="RowKey">The customer's RowKey</param>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.CustomersController.GetByCard(System.Int64)">
+            <summary>
+            Get the customer name and surname for a given credit card number
+            </summary>
+            <param name="ccnumber">Credit card number</param>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.DocumentsController.Get(System.String)">
+            <summary>
+            Get documents for that customer
+            </summary>
+            <param name="CustomerID">The customer RowKey</param>
+            <returns></returns>
+        </member>
+        <member name="M:BankioskAPI.Controllers.PhotoController.PostPictureAsync">
+            <summary>
+            From the UI, the picture is posted to this service which will
+            send it to the REST API and pass the result back
+            </summary>        
+            <returns>The person information after authentication</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+	height: 100px;
+	background-color: #007BFF;
+	padding: 10px;
+}
+
+header h1 {
+	color: white;
+}
+
+header h4 {
+	color: white;
+	font-weight: bold;
+}
+
+header h4 a, header h4 a:hover {
+	color: white;
+	text-decoration: underline;
+	font-size: 12px;
+}
+
+.hand {
+	cursor: pointer;
+}
+
+.userPhoto-container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+
+.userPhoto-videoElement {
+	width: 500px;
+	height: 375px;
+	background-color: #666;
+}
+
+.userPhoto-canvas {
+	width: 500px;
+	height: 375px;
+	display: none;
+}

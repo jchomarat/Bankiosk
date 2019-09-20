@@ -1,0 +1,90 @@
+{
+    "modulesContent": {
+        "$edgeAgent": {
+            "properties.desired": {
+                "modules": {
+                    "bankiosk-ui": {
+                        "settings": {
+                            "image": "bankioskcontainersregistry.azurecr.io/bankiosk/ui:latest",
+                            "createOptions": "{\"ExposedPorts\":{\"3000/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"3000/tcp\":[{\"HostPort\":\"3000\"}]}}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    },
+                    "bankiostiot": {
+                        "settings": {
+                            "image": "bankioskcontainersregistry.azurecr.io/bankiosk/iot:$(BUILD_BUILDID)",
+                            "createOptions": "{\"ExposedPorts\":{\"1234/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"1234/tcp\":[{\"HostPort\":\"1234\"}]}}}"
+                        },
+                        "type": "docker",
+                        "version": "1.0",
+                        "env": {
+                            "NFC_MODE_CONFIG": {
+                                "value": "/dev/ttyS0"
+                            },
+                            "NFC_MODE": {
+                                "value": "HSU"
+                            },
+                            "ASPNETCORE_URLS": {
+                                "value": "http://+:1234"
+                            }
+                        },
+                        "status": "running",
+                        "restartPolicy": "always"
+                    }
+                },
+                "runtime": {
+                    "settings": {
+                        "minDockerVersion": "v1.25",
+                        "registryCredentials": {
+                            "bankioskContainersRegistry": {
+                                "address": "bankioskcontainersregistry.azurecr.io",
+                                "password": "XRu5rHQjuZoJLoNTi5qH+m85oRPXrx+i",
+                                "username": "bankioskContainersRegistry"
+                            }
+                        }
+                    },
+                    "type": "docker"
+                },
+                "schemaVersion": "1.0",
+                "systemModules": {
+                    "edgeAgent": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
+                            "createOptions": ""
+                        },
+                        "type": "docker"
+                    },
+                    "edgeHub": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
+                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+                        },
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always"
+                    }
+                }
+            }
+        },
+        "$edgeHub": {
+            "properties.desired": {
+                "routes": {
+                    "route": "FROM /messages/* INTO $upstream"
+                },
+                "schemaVersion": "1.0",
+                "storeAndForwardConfiguration": {
+                    "timeToLiveSecs": 7200
+                }
+            }
+        },
+        "bankiosk-ui": {
+            "properties.desired": {}
+        },
+        "bankiostiot": {
+            "properties.desired": {}
+        }
+    }
+}

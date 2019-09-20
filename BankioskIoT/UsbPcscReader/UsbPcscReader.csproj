@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\pcsc-sharp\src\PCSC\PCSC.csproj" />
+    <ProjectReference Include="..\..\PN532\Card\CardRfid.csproj" />
+    <ProjectReference Include="..\..\PN532\Card\CreditCard\CreditCardProcessing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PCSC.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

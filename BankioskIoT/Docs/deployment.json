@@ -1,0 +1,120 @@
+{
+    "id": "bankiosk_smartcard",
+    "schemaVersion": null,
+    "labels": {},
+    "content": {
+        "modulesContent": {
+            "$edgeAgent": {
+                "properties.desired": {
+                    "modules": {
+                        "bankiostiot": {
+                            "settings": {
+                                "image": "bankioskcontainersregistry.azurecr.io/bankiosk/iot:2",
+                                "createOptions": "{\"ExposedPorts\":{\"1234/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"1234/tcp\":[{\"HostPort\":\"1234\"}]}}}"
+                            },
+                            "type": "docker",
+                            "env": {
+                                "NFC_MODE_CONFIG": {
+                                    "value": "/dev/ttyS0"
+                                },
+                                "NFC_MODE": {
+                                    "value": "HighSpeedUart"
+                                },
+                                "ASPNETCORE_URLS": {
+                                    "value": "http://+:1234"
+                                },
+                                "NONFC": {
+                                    "value": "smartcard"
+                                }
+                            },
+                            "status": "running",
+                            "restartPolicy": "always",
+                            "version": "1.0"
+                        },
+                        "bankiosk-ui": {
+                            "settings": {
+                                "image": "bankioskcontainersregistry.azurecr.io/bankiosk/ui:latest",
+                                "createOptions": "{\"ExposedPorts\":{\"3000/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"3000/tcp\":[{\"HostPort\":\"3000\"}]}}}"
+                            },
+                            "type": "docker",
+                            "version": "1.0",
+                            "env": {
+                                "REACT_APP_BASE_CORE_URL": {
+                                    "value": "http://localhost:1234"
+                                }
+                            },
+                            "status": "running",
+                            "restartPolicy": "always"
+                        }
+                    },
+                    "runtime": {
+                        "settings": {
+                            "minDockerVersion": "v1.25",
+                            "registryCredentials": {
+                                "bankioskreg": {
+                                    "address": "bankioskcontainersregistry.azurecr.io",
+                                    "password": "YOURPASSWORD",
+                                    "username": "bankioskContainersRegistry"
+                                }
+                            }
+                        },
+                        "type": "docker"
+                    },
+                    "schemaVersion": "1.0",
+                    "systemModules": {
+                        "edgeAgent": {
+                            "settings": {
+                                "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
+                                "createOptions": ""
+                            },
+                            "type": "docker"
+                        },
+                        "edgeHub": {
+                            "settings": {
+                                "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
+                                "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+                            },
+                            "type": "docker",
+                            "status": "running",
+                            "restartPolicy": "always"
+                        }
+                    }
+                }
+            },
+            "$edgeHub": {
+                "properties.desired": {
+                    "routes": {
+                        "route": "FROM /messages/* INTO $upstream"
+                    },
+                    "schemaVersion": "1.0",
+                    "storeAndForwardConfiguration": {
+                        "timeToLiveSecs": 7200
+                    }
+                }
+            }
+        }
+    },
+    "targetCondition": "deviceid=*",
+    "createdTimeUtc": "2019-07-31T09:11:09.083Z",
+    "lastUpdatedTimeUtc": "2019-07-31T12:08:08.406Z",
+    "priority": 1,
+    "systemMetrics": {
+        "results": {
+            "appliedCount": 1,
+            "reportedSuccessfulCount": 1,
+            "reportedFailedCount": 0,
+            "targetedCount": 1
+        },
+        "queries": {
+            "Targeted": "select deviceId from devices where capabilities.iotEdge = true and deviceid=*",
+            "Applied": "select deviceId from devices.modules where moduleId = '$edgeAgent' and configurations.[[bankiosk_usb]].status = 'Applied'",
+            "Reporting Success": "select deviceId from devices.modules where moduleId = '$edgeAgent' and configurations.[[bankiosk_usb]].status = 'Applied' and properties.desired.$version = properties.reported.lastDesiredVersion and properties.reported.lastDesiredStatus.code = 200",
+            "Reporting Failure": "select deviceId from devices.modules where moduleId = '$edgeAgent' and configurations.[[bankiosk_usb]].status = 'Applied' and properties.desired.$version = properties.reported.lastDesiredVersion and properties.reported.lastDesiredStatus.code != 200"
+        }
+    },
+    "metrics": {
+        "results": {},
+        "queries": {}
+    },
+    "etag": "NQ=="
+}
