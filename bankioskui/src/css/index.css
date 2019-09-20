@@ -8,9 +8,9 @@ body {
 }
 
 header {
-	height: 100px;
+	height: 65px;
 	background-color: #007BFF;
-	padding: 10px;
+	padding: 6px;
 }
 
 header h1 {
@@ -25,7 +25,6 @@ header h4 {
 header h4 a, header h4 a:hover {
 	color: white;
 	text-decoration: underline;
-	font-size: 12px;
 }
 
 .hand {
@@ -41,7 +40,7 @@ header h4 a, header h4 a:hover {
 
 .userPhoto-videoElement {
 	width: 500px;
-	height: 375px;
+	height: 350px;
 	background-color: #666;
 }
 

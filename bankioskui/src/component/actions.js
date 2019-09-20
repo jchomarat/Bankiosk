@@ -21,14 +21,14 @@ class ActionLists extends React.Component {
         else {
             return (
                 <Fragment>
-                    <div className="text-center mt-5">
-                        <h4>
+                    <div className="text-center mt-2">
+                        <h5>
                             Please select the action you want to do today. This will help us optimize your experience.
-                        </h4>
-                        <div className="d-flex flex-wrap">
+                        </h5>
+                        <div className="d-flex flex-wrap align-items-stretch">
                             {this.props.actionsList.map((action) => 
-                                <div className="w-50" key={action}>
-                                    <Button className="mt-5 p-3 w-75" onClick={this.onClick} key={action} action={action}>{action}</Button>
+                                <div className="w-50 p-2" key={action}>
+                                    <Button className="mt-2 p-2 w-75 h-100 btn-lg" onClick={this.onClick} key={action} action={action}>{action}</Button>
                                 </div>
                             )}  
                         </div>

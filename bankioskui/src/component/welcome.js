@@ -16,7 +16,7 @@ class Login extends React.Component {
     render() {
         return (
             <Fragment>
-                <Button onClick={this.login}>Login</Button>
+                <Button className="mt-2 p-2 w-75 btn-lg" onClick={this.login}>Login</Button>
             </Fragment>
         );
     }
@@ -32,16 +32,16 @@ class Welcome extends React.Component {
         return (
             <Container>
                 <Row>
-                    <Col md={7}>
-                    <Actions />
+                    <Col md={9}>
+                        <Actions />
                     </Col>
                     <Col md={1} className="align-self-center">
-                    <h3>
+                    <h4>
                         <b>Or</b>
-                    </h3>
+                    </h4>
                     </Col>
-                    <Col md={4} className="align-self-center justify-content-center">
-                    <Login onLoginClick={this.onLoginClick} />
+                    <Col md={2} className="align-self-center justify-content-center">
+                        <Login onLoginClick={this.onLoginClick} />
                     </Col>
                 </Row>
             </Container> 

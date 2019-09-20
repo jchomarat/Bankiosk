@@ -35,35 +35,29 @@ class UserInfo extends React.Component {
                 <Fragment>
                     <Card body>
                         <h4><b>Credit card information</b></h4>
-                        <div>
-                            <ul>
-                                <li><b>Card expiration date:</b> {this.formatDateCc(this.props.user.card.ExpirationDate)}</li>
-                                <li><b>Number total of operations:</b> {this.props.user.card.NumberOperation}</li>
-                                <li><b>Number of PIN retrie(s) left:</b> {this.props.user.card.PinRetryLeft}</li>
-                            </ul>
-                        </div>
-                    </Card>
-                    <br />
-                    <Card body>
-                        <h4><b>Upcoming appointments</b></h4>
-                        <div>
                         <ul>
-                                {this.props.user.appointments.map((a) => 
-                                    <li key={a.Subject}>{a.Subject} with <b>{a.AdvisorDetails.FirstName} {a.AdvisorDetails.Surname}</b> on {this.formatDateAppointment(a.AppointmentTime)}</li>
-                                )}
-                            </ul>
-                        </div>
+                            <li><b>Card expiration date:</b> {this.formatDateCc(this.props.user.card.ExpirationDate)}</li>
+                            <li><b>Number total of operations:</b> {this.props.user.card.NumberOperation}</li>
+                            <li><b>Number of PIN retrie(s) left:</b> {this.props.user.card.PinRetryLeft}</li>
+                        </ul>
                     </Card>
-                    <br />
-                    <Card body>
+
+                    <Card body className="mt-2">
+                        <h4><b>Upcoming appointments</b></h4>
+                        <ul>
+                            {this.props.user.appointments.map((a) => 
+                                <li key={a.Subject}>{a.Subject} with <b>{a.AdvisorDetails.FirstName} {a.AdvisorDetails.Surname}</b> on {this.formatDateAppointment(a.AppointmentTime)}</li>
+                            )}
+                        </ul>
+                    </Card>
+
+                    <Card body className="mt-2">
                         <h4><b>Documents to retreive at the main desk</b></h4>
-                        <div>
-                            <ul>
-                                {this.props.user.documents.map((d) => 
-                                    <li key={d}>{d}</li>
-                                )}
-                            </ul>
-                        </div>
+                        <ul>
+                            {this.props.user.documents.map((d) => 
+                                <li key={d}>{d}</li>
+                            )}
+                        </ul>
                     </Card>
                 </Fragment>
             );
@@ -250,26 +244,31 @@ class FaceAuthenticate extends React.Component {
         }
         else {
             return (
-                <Fragment>
-                    <video autoPlay={false} id="videoElement" className="userPhoto-videoElement"></video>
-                    <ButtonToolbar>
-                        <ButtonGroup className="mr-2">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    I am there!
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    {this.state.videoInputs.map((input) => <Dropdown.Item onClick={this.captureStream} key={input.id} deviceid={input.id}>{input.label}</Dropdown.Item>)}   
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </ButtonGroup>
-                        <ButtonGroup>
-                            <Button onClick={this.faceAuthenticate} disabled={this.state.takePhotoButtonDisabled}>Take photo</Button>
-                        </ButtonGroup>
-                    </ButtonToolbar>
-                    <canvas className="userPhoto-canvas" id="canvas" /><br />
-                </Fragment>
+                <Container>
+                    <Row>
+                        <Col md={3}>
+                            <ButtonToolbar>
+                                <ButtonGroup className="mr-2">
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                            [Select camera]
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            {this.state.videoInputs.map((input) => <Dropdown.Item onClick={this.captureStream} key={input.id} deviceid={input.id}>{input.label}</Dropdown.Item>)}   
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </ButtonGroup>
+                                <ButtonGroup  className="mt-5">
+                                    <Button className="btn-lg" onClick={this.faceAuthenticate} disabled={this.state.takePhotoButtonDisabled}>Take photo</Button>
+                                </ButtonGroup>
+                            </ButtonToolbar>
+                        </Col>
+                        <Col md={9} className="align-self-center">
+                            <video autoPlay={false} id="videoElement" className="userPhoto-videoElement"></video>                    
+                            <canvas className="userPhoto-canvas" id="canvas" /><br />
+                        </Col>
+                    </Row>
+                </Container>
             );
         }
     }
@@ -351,7 +350,7 @@ class UserAuthenticate extends React.Component {
         return (
             <Container>
                 <Row>
-                    <Col md={12} className="mt-5 justify-content-center">
+                    <Col md={12} className="mt-2 justify-content-center">
                         <Loader fullPage loading={this.state.showLoadingOverlay} containerStyle={{background: "rgba(255, 255, 255, 0.9)"}}/>
                         <FaceAuthenticate 
                             onFaceAuthenticate={this.onAsync}
