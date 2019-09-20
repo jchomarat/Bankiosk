@@ -54,7 +54,7 @@ This project need to be installed on the on the Raspberry PI via Iot Hub. Follow
 
 This is the UI of our kiosk, built in React. This application only consumes services from BankioskIoT that acts as a proxy. The trick with this project was to connect to the camera/web cam in order to authenticate customers with his/her faces, and hook it to the NFC card reader via BankioskIoT.
 
-This project, in node.js under the hood, also needs to be deployed on the Raspberry Pi. Follow [this guide](./BankioskUI/README.md) for the procedure!
+This project, in node.js under the hood, also needs to be deployed on the Raspberry Pi. Follow [this guide](./bankioskui/README.md) for the procedure!
 
 ## Contributors
 
