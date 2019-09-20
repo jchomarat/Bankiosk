@@ -23,7 +23,7 @@ Alternatively, if I do not have any planned actions, I could simply select the r
 * getting information on a specific product 
 * etc … 
 
-With the information, the routing witihn the branch would be optimum, the branch manager would know in real time what is happening in the branch.
+With the information, the routing within the branch would be optimum, the branch manager would know in real time what is happening in the branch.
 Adding some machine learning on top of that data would also help tje branch manager to anticipate busy days, and making sure he allocated anough people. 
 
 You can see below a small video presenting our prototype
