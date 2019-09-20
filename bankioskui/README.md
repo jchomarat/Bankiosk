@@ -7,7 +7,7 @@ To deploy BankioskUI, follow the steps
 First, clone the repository
 
 ```sh
-/> git clone https://https://github.com/jchomarat/bankiosk/bankioskUI
+/> git clone https://https://github.com/jchomarat/Bankiosk/bankioskUI
 ```
 
 Build the docker image by running the following command
