@@ -101,6 +101,22 @@ What is important above is the Privileged and the port (by default it is 3000, b
 
 To have a maximezed experience, the RPI should boot in "kiosk" mode. The kiosk mode allows, once the RPI is loaded, to launch Chromium (the default browser) in full screen on the page you select. It creates an immersive experience.
 
+## Remove the mouse cursor
+
+First of all, it is best to hide the mouse cursor, to do so, edit the following file
+
+```sh
+> sudo nano /etc/lightdm/lightdm.conf
+```
+
+And look for the string **xserver-command**, uncomment it and add the following value
+
+```sh
+xserver-command=X -nocursor
+```
+
+## Set up the kiosk mode at boot time
+
 To do so, follow the steps below (got from [here](http://blog.philippegarry.com/2018/08/19/faire-de-son-pi-une-borne-raspberry-pi-kiosk-mode-stretch-version/) in french)
 
 Create the folder ~/.config/autostart if it does not exist (under your default account used at startup, by default *pi*)
@@ -131,3 +147,25 @@ Comment=Start bankiosk in kiosk mode
 Make sure to replace *$bankioskUI_URL* by the actual URL (by default, a React app URL is http://localhost:3000)
 
 Reboot your RPI - and Bankiosk should be opened right away. Please note that it may takes some time to start the different containers, you may then receive an error message. Do no worry, it will refresh once ready!
+
+## Set up the kiosk mode manually
+
+Alternatively, you can start the kiosk mode manually. To achieve this, create a new file on the Desktop (that you can activate without a mouse or keyboard if the screen is tactlie)
+
+```sh
+> nano ~/Desktop/startKiosk.sh
+```
+
+Paste the following
+
+```sh
+/usr/bin/chromium-browser --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --kiosk $bankioskUI_URL 
+```
+
+Make sure to replace *$bankioskUI_URL* by the actual URL (by default, a React app URL is http://localhost:3000)
+
+Save, and make this script executable
+
+```sh
+> chmod a+x ~/Desktop/startKiosk.sh
+```
