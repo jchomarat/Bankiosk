@@ -7,5 +7,9 @@
         public string FaceKey { get; set; }
         public string FaceEndPoint { get; set; }
         public string FaceGroupID { get; set; }
+        public string CustomVisionPredictionKey { get; set; }
+        public string CustomVisionPredictionEndPoint { get; set; }
+        public string CustomVisionPredictionProjectId { get; set; }
+        public string CustomVisionPredictionIterationName { get; set; }
     }
 }
