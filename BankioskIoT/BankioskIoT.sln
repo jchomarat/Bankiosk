@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankioskIoT", "BankioskIoT\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsbPcscReader", "UsbPcscReader\UsbPcscReader.csproj", "{C81830FC-B099-477A-9A02-AEBB4FB8F49F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardProcessing", "..\PN532\Card\CreditCard\CreditCardProcessing.csproj", "{89C70F16-EA80-4E92-8056-4C5EACEF3865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardProcessing", "PN532\Card\CreditCard\CreditCardProcessing.csproj", "{89C70F16-EA80-4E92-8056-4C5EACEF3865}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardRfid", "..\PN532\Card\CardRfid.csproj", "{85985AAA-7224-4DA6-AAB6-F0D473FE8C37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardRfid", "PN532\Card\CardRfid.csproj", "{85985AAA-7224-4DA6-AAB6-F0D473FE8C37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pn532", "..\PN532\Pn532\Pn532.csproj", "{47519A95-089C-4605-A30A-ABE22E1775FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pn532", "PN532\Pn532\Pn532.csproj", "{47519A95-089C-4605-A30A-ABE22E1775FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCSC", "..\pcsc-sharp\src\PCSC\PCSC.csproj", "{C3B4FE83-143C-4FB4-B026-C0254498D535}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCSC", "pcsc-sharp\src\PCSC\PCSC.csproj", "{C3B4FE83-143C-4FB4-B026-C0254498D535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

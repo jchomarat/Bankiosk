@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\pcsc-sharp\src\PCSC\PCSC.csproj" />
-    <ProjectReference Include="..\..\PN532\Card\CardRfid.csproj" />
-    <ProjectReference Include="..\..\PN532\Card\CreditCard\CreditCardProcessing.csproj" />
+    <ProjectReference Include="..\pcsc-sharp\src\PCSC\PCSC.csproj" />
+    <ProjectReference Include="..\PN532\Card\CardRfid.csproj" />
+    <ProjectReference Include="..\PN532\Card\CreditCard\CreditCardProcessing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
