@@ -1,13 +1,14 @@
-﻿using BankioskIoT.Models;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BankioskIoT.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BankioskIoT.Controllers
 {
@@ -58,5 +59,46 @@ namespace BankioskIoT.Controllers
             return resp;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ActionResult<JObject>> FunFact()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(_apiUrl);
+            var byteContent = new StreamContent(Request.Body);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(Request.ContentType));
+            HttpResponseMessage response = await client.PostAsync("Photo/FunFact", byteContent);
+            dynamic resp = new JObject();
+            if (!response.IsSuccessStatusCode)
+            {
+                resp.status = false;
+                resp.value = "Could not get fun fact from custom vision";
+                Debug.WriteLine($"Error {response.StatusCode} ({response.ReasonPhrase})");
+                return resp;
+            }
+            else
+            {
+                var funFacts = await response.Content.ReadAsAsync<List<PhotoFunFact>>();
+                // Get the highest probability for those over 75%
+                var goodProbabilities = funFacts.Where(f => f.Probability > 75);
+
+                if (goodProbabilities.Count() > 0)
+                {
+                    // Get the highest tag found on the image
+                    resp.status = true;
+                    resp.value = JsonConvert.SerializeObject(
+                        goodProbabilities.OrderByDescending(f => f.Probability).First()
+                    );
+                    return resp;
+                }
+                else
+                {
+                    // No good tags found, send nothing
+                    resp.status = false;
+                    resp.value = "This picture does not have trained tags";
+                    return resp;
+                }
+            }
+        }
     }
 }
