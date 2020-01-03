@@ -13,10 +13,13 @@ class Authenticate {
             let audit = new Audit();
             await audit.AuthenticationPerformed("faceAPI");
 
-            return {status: true, data: JSON.parse(data.value)};
+            return {status: true, data: JSON.parse(data.value), funFact: null};
         }
         else {
-            return {status: false, data: null};
+            // No user found, try to get fun fact out of the photo to make the kiosk more "alive"
+            let response = await api.PostImage(api.photoFunFactEndPoint(), blob);
+            let funFact = await response.json();
+            return {status: false, data: null, funFact: (response.status && funFact.status) ? JSON.parse(funFact.value) : null};
         }
     }
 

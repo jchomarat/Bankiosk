@@ -140,6 +140,7 @@ class UserFaceUnknown extends React.Component {
                         <div>
                             Sorry, you are unknown
                         </div>
+                        <UserFunFact show={this.props.funFact !== null} funFact={this.props.funFact} />
                         <Button onClick={this.retry}>Try again</Button>
                     </Card>
                 </Fragment>
@@ -149,6 +150,30 @@ class UserFaceUnknown extends React.Component {
         );
     }
 
+}
+
+class UserFunFact extends React.Component {
+    render() {
+        if (this.props.funFact !== null && this.props.funFact.TagName == "hat") {
+            return (
+                <div>However, you have a nice hat, it suits you perfectly!</div>
+            );
+        }
+
+        if (this.props.funFact !== null && this.props.funFact.TagName == "glasses") {
+            return (
+                <div>However, these glasses highlight your beautiful eyes!</div>
+            );
+        }
+
+        if (this.props.funFact !== null && this.props.funFact.TagName == "tie") {
+            return (
+                <div>However, this tie, sir, is amazing. The color is perfect with the suit!</div>
+            );
+        }
+
+        return ("");
+    }
 }
 
 class FaceAuthenticate extends React.Component {
@@ -217,7 +242,7 @@ class FaceAuthenticate extends React.Component {
     }
 
     faceAuthenticate = async () => {
-        // Show lading bar
+        // Show loading bar
         this.props.onFaceAuthenticate();
         const canvas = document.querySelector("#canvas");
         const video = document.querySelector("#videoElement");
@@ -232,7 +257,7 @@ class FaceAuthenticate extends React.Component {
                         this.props.onFaceAuthenticated(data.data);
                     }
                     else {
-                        this.props.onFaceAuthenticated(null);
+                        this.props.onFaceAuthenticated(null, data.funFact);
                     }
                 })
         })      
@@ -281,7 +306,8 @@ class UserAuthenticate extends React.Component {
         this.state = {
             step: "faceauthenticate",
             showLoadingOverlay: false,
-            userInfo: null //{FirstName, Surname, RowKey} then after cards/documents/appointments
+            userInfo: null, //{FirstName, Surname, RowKey} then after cards/documents/appointments
+            userFunFact: null // If user unknown, some fun fact may appear
         }
     }
 
@@ -296,13 +322,14 @@ class UserAuthenticate extends React.Component {
         });
     }
 
-    onFaceAuthenticated = (user) => {
+    onFaceAuthenticated = (user, funFact) => {
         this.setState({ 
             showLoadingOverlay: false,
             userInfo: user,
-            step: (user !== null ? "cardauthenticate" : "userfaceunknown")
+            step: (user !== null ? "cardauthenticate" : "userfaceunknown"),
+            userFunFact: funFact
             }, () => {
-                // Tell parent about ik
+                // Tell parent about it
                 if (user !== null)
                     this.props.onLoginStatusChanged(user);
         });
@@ -357,7 +384,7 @@ class UserAuthenticate extends React.Component {
                             onFaceAuthenticated={this.onFaceAuthenticated} 
                             show={this.state.step === "faceauthenticate"}
                         />
-                        <UserFaceUnknown show={this.state.step === "userfaceunknown"} retry={this.retry} />
+                        <UserFaceUnknown show={this.state.step === "userfaceunknown"} funFact={this.state.userFunFact} retry={this.retry} />
                         <CardAuthenticate 
                             onCardAuthenticate={this.onAsync}
                             onCardAuthenticated={this.onCardAuthenticated} 

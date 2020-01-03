@@ -5,6 +5,7 @@ class ApiCalls {
         
         // instantiate endpoints
         this._photoEndPoint = "/api/photo";
+        this._photoFunFactEndPoint = "/api/photo/funfact";
         this._ccAuthEndPoint = "/api/ccauth";
         this._actionsListEndPoint = "/api/action";
 
@@ -19,6 +20,10 @@ class ApiCalls {
 
     photoEndPoint() {
         return (`${this.bankiosk}${this._photoEndPoint}`);
+    }
+
+    photoFunFactEndPoint() {
+        return (`${this.bankiosk}${this._photoFunFactEndPoint}`);
     }
 
     ccAuthEndPoint(id) {
